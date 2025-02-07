@@ -10,7 +10,8 @@ const playGuessingGame = () => {
     let numbers = Array.from({ length: 10000 }, (_, i) => i + 1); // Создаём массив чисел от 1 до 100
 
     while (numbers.length > 0) {
-        const middleIndex = Math.floor(numbers.length / 2); // Находим середину массива
+        // Оптимизация: проверяем ближайший к верхней границе элемент в случае малого диапазона
+        const middleIndex = numbers.length > 10 ? Math.floor(numbers.length / 2) : numbers.length - 1;
         const guess = numbers[middleIndex];
         attempts++;
         console.log(`Компьютер 2: Пробую число ${guess}.`);
